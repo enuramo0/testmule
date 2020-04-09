@@ -14,6 +14,8 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<db:select doc:name="Select" doc:id="ed696757-7c42-4a88-ab5f-41e37b8a592f" config-ref="Database_Config">
 			<db:sql >select * from db1</db:sql>
 		</db:select>
+		<logger level="INFO" doc:name="limshaL" doc:id="a60f4df3-78ed-4a29-9e8f-ce31f2f71e23" message="limsha&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; #[payload]"/>
+		<logger level="INFO" doc:name="mynewLogger" doc:id="81cc9e14-8529-4e8f-b1f1-1c47558c6475" message="limshah123 #[payload]"/>
 		<ee:transform doc:name="Transform Message" doc:id="d5c19824-2072-48a1-8e78-fc8b2cb157f0" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -23,6 +25,7 @@ payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="4fa274ce-d460-4e73-bdd2-a91a3e3272a6" message="#[payload]"/>
+		<logger level="INFO" doc:name="another-Logger" doc:id="ffc6da58-373a-4b8f-9da2-3c4204b68ea1" message="yib&gt;&gt;&gt;&gt;#[payload]"/>
 	</flow>
 	
 	<flow name="getAllById" doc:id="7acefc76-68e3-4887-b7e6-38ddbf0ab7bd" >
