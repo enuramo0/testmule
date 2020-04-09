@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>db-april4</artifactId>
+	<artifactId>newtestapi</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
-	<name>db-april4</name>
+	<name>newtestapi</name>
 
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,16 +25,9 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-			<configuration>
-                    <sharedLibraries>
-                        <sharedLibrary>
-                            <groupId>com.mycompany</groupId>
-                            <artifactId>ojdbc8</artifactId>
-                        </sharedLibrary>
-                    </sharedLibraries>
-                <classifier>mule-application</classifier>
-                </configuration>
-            </plugin>
+				<configuration>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -50,18 +44,7 @@
             <version>1.1.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-		<dependency>
-            <groupId>org.mule.connectors</groupId>
-            <artifactId>mule-db-connector</artifactId>
-            <version>1.5.5</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-    	<dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>0.1</version>
-        </dependency>
-    </dependencies>
+	</dependencies>
 
 	<repositories>
           <repository>

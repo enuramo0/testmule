@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="1e559c7c-6af9-40db-aeb5-40d5d88b7103" >
+		<db:oracle-connection host="localhost" user="system" password="Limshaw41" instance="orcl"/>
+	</db:config>
+	<flow name="db-april4Flow" doc:id="c7645157-8740-4a29-81ce-164d26769ea6" >
+		<http:listener doc:name="Listener" doc:id="3a96f25b-1fd2-48d8-8877-cdb6b9c259d7" path="/test" config-ref="Database_Config"/>
+		<db:select doc:name="Select" doc:id="0a681396-4dec-4036-a8d2-4cf7b3ae5c68" config-ref="Database_Config">
+			<db:sql >select * from db1</db:sql>
+		</db:select>
+		<logger level="INFO" doc:name="limshaL" doc:id="8558ba78-8a07-4bf6-8da5-f680fdc0e1c7" message="limsha99999 #[payload]"/>
+		<logger level="INFO" doc:name="mynewLogger" doc:id="ca1401d7-3e44-4689-a91f-c765e4b6e9c8" message="limshah123 #[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="c7d5337f-3aca-4e0a-b363-f9fc1175fd58" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="d962e360-9775-425c-a219-cac55c92e31f" message="#[payload]"/>
+		<logger level="INFO" doc:name="another-Logger" doc:id="525d392e-4125-4e00-a781-7519f02d61cc" message="yib&gt;&gt;&gt;&gt;#[payload]"/>
+	</flow>
+	
+	<flow name="getAllById" doc:id="3de2a2f6-049a-48b0-899d-0d52deb632d1" >
+		<http:listener doc:name="Listener" doc:id="a7f9d9b4-37de-4bfd-b458-132d82d04d21" path="/user/{ID}" config-ref="Database_Config"/>
+		<db:select doc:name="Select" doc:id="3ccc3b72-5633-4fd5-bbbb-a9aeff4ce75b" config-ref="Database_Config">
+			<db:sql >select * from DB1
+
+where ID=:id</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+'id': attributes.uriParams.ID
+}]]]></db:input-parameters>
+		
+</db:select>
+		<logger level="INFO" doc:name="myNewLogger" doc:id="8ca6b75d-cd0c-4380-be8a-d36d0b43ceaa" message="888 #[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="dee71cef-3740-4fe5-9baf-8889d4e1835b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	
+	
+	<flow name="create-customer-detail" doc:id="99c59d4d-b850-4943-a093-d015ab5b4d9c" >
+		<http:listener doc:name="Listener" doc:id="0986ebe6-7923-4c57-a15a-79135c67b18d" path="/insert" config-ref="Database_Config"/>
+		<db:insert doc:name="Insert" doc:id="7f1719d7-ff91-4dcc-b1dc-07ba0e12a9aa" config-ref="Database_Config">
+			<db:sql >insert into DB1 (ID, NAME, AGE) 
+values(:id, :name, :age)</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+'id' : payload.ID,
+'name': payload.NAME,
+'age': payload.AGE
+}]]]></db:input-parameters>
+		</db:insert>
+		<ee:transform doc:name="Transform Message" doc:id="6fc0278c-6a1a-48f9-acc6-aa35ef74197e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message:'data successfully inserted'
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	
+</flow>
+
+	<flow name="delete-customer-data" doc:id="08f8e04c-dd44-401e-813a-76289adb99b3" >
+		<http:listener doc:name="Listener" doc:id="3c06e178-79a9-4c1b-a1f9-28389a9598dc" path="/delete" config-ref="Database_Config"/>
+		<db:delete doc:name="Delete" doc:id="687d93de-296e-4222-b853-dd387f5c65a1" config-ref="Database_Config">
+			<db:sql >delete from DB1 where ID = :id</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+'id' : payload.ID,
+'name': payload.NAME,
+'age': payload.AGE
+}]]]></db:input-parameters>
+		</db:delete>
+		<ee:transform doc:name="Transform Message" doc:id="3d0c37b4-45a1-4638-969b-44437db4769a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message:'data successfully deleted'
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	
+		<flow name="update-customer-data" doc:id="fe6716ce-0d07-43e6-95f9-fce0dce6b1cd" >
+		<http:listener doc:name="Listener" doc:id="6a532bff-6afa-402d-95ff-933c5b645116" path="/update" config-ref="Database_Config"/>
+		<db:update doc:name="Update" doc:id="84989880-3dad-45f9-8146-c71a251bce2f" config-ref="Database_Config">
+			<db:sql >update DB1 set Name = :name, Age =:age where ID = :id</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+'id' : payload.ID,
+'name': payload.NAME,
+'age': payload.AGE
+}]]]></db:input-parameters>
+		</db:update>
+		<ee:transform doc:name="Transform Message" doc:id="f35c3fef-a3c0-4b18-adf5-d7334524d86a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+message: 'data successfully updated'	
+	
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
