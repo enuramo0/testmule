@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c0f71178-0543-4b24-8381-c27648abfb00" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="new-projectFlow" doc:id="af814b68-2163-42f2-ac43-5639c3da5cd8" >
+		<http:listener doc:name="Listener" doc:id="6517e7d4-325f-4148-87a3-e8e218ca7ab9" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value="'hello endale'" doc:name="Set Payload" doc:id="a7f5b818-41ed-4bfc-95bb-86790610d37c" />
+		<logger level="INFO" doc:name="Logger" doc:id="f701dc6d-48b5-41e5-8d97-e755b7ed1299" message="limsha &gt;&gt;&gt;&gt;#[payload]"/>
+	</flow>
+</mule>
