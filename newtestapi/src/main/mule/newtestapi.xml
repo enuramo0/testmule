@@ -48,6 +48,7 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="1ace884e-b735-4df7-b81c-180de3aec1cb" message="a new logger has added &gt;&gt;&gt;&gt;#[payload]"/>
 	</flow>
 	
 	
