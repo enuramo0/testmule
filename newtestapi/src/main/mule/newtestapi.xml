@@ -39,16 +39,16 @@ where ID=:id</db:sql>
 }]]]></db:input-parameters>
 		
 </db:select>
-		<logger level="INFO" doc:name="myNewLogger" doc:id="8ca6b75d-cd0c-4380-be8a-d36d0b43ceaa" message="888 #[payload]"/>
-		<ee:transform doc:name="Transform Message" doc:id="dee71cef-3740-4fe5-9baf-8889d4e1835b" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+		<ee:transform doc:name="Transform Message" doc:id="dee71cef-3740-4fe5-9baf-8889d4e1835b">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="1ace884e-b735-4df7-b81c-180de3aec1cb" message="a new logger has added &gt;&gt;&gt;&gt;#[payload]"/>
+		<logger level="INFO" doc:name="myNewLogger" doc:id="8ca6b75d-cd0c-4380-be8a-d36d0b43ceaa" message="888 #[payload]"/>
+		<set-payload value="limsha 9999&gt;&gt;&gt; #[payload]" doc:name="Set Payload" doc:id="45cfcafa-335c-4dd8-af8e-570e62c22134" />
 	</flow>
 	
 	
